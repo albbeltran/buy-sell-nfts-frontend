@@ -10,8 +10,9 @@ contract MyNFT is ERC721, ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
 
-    mapping(uint => uint) public salePrice;
-    // uint[] tokensForSale;
+    uint public cost = 10000 wei;
+
+    string IpfsUri = "https://gateway.pinata.cloud/ipfs/QmPSs2EJN61PCMQADvar2MctaUwzD1LPZuraPxmLGsnMRJ/blue.json"; 
 
     constructor() ERC721("TestingNFTs", "NFT") {}
 
@@ -19,18 +20,7 @@ contract MyNFT is ERC721, ERC721URIStorage, Ownable {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
-        _setTokenURI(tokenId, tokenURI);
-    }
-
-    function setForSale(uint256 _tokenId) external {
-        address owner = ownerOf(_tokenId);
-        require(owner == msg.sender);
-
-        salePrice[_tokenId] = 1 ether;
-
-        // tokensForSale.push(_tokenId);
-
-        emit Approval(owner, address(this), _tokenId);
+        _setTokenURI(tokenId, IpfsUri);
     }
 
     function buy(uint256 _tokenId) external payable {
@@ -38,7 +28,7 @@ contract MyNFT is ERC721, ERC721URIStorage, Ownable {
         uint payedPrice = msg.value;
 
         require(getApproved(_tokenId) == address(this));
-        require(payedPrice >= salePrice[_tokenId], "Insufficient funds");
+        require(payedPrice >= cost, "Insufficient funds");
 
         // pay the seller
         (bool sent, /* memory data */) = buyer.call{value: msg.value}("");
