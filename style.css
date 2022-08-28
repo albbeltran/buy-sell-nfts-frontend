@@ -1,0 +1,33 @@
+.navbar {
+    display: flex;
+    padding: 1rem 0;
+    flex-direction: row;
+    background-color: cornflowerblue;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.logo {
+    width: 75px;
+}
+
+.wallet {
+    font-size: 20px;
+}
+
+.navbar-link {
+    list-style: none;
+}
+
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+    padding: 0.75em 1.25em;
+}
+
+.btn:hover {
+    background-color: #353535;
+}
