@@ -11,8 +11,17 @@
     width: 75px;
 }
 
-.wallet {
+.account-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: space-between;
+    text-align: center;
+}
+
+.account-details > p {
     font-size: 20px;
+    margin: 0;
 }
 
 .navbar-link {
